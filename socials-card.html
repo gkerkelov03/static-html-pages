@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f5f2;
+      --card: #ffffff;
+      --text: #1a1814;
+      --muted: #8a8680;
+      --border: #e8e4de;
+      --accent: #c9a96e;
+      --accent-light: #f5efe4;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* subtle grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px 40px 40px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.06);
+      animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* top accent line */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 40px; right: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      border-radius: 0 0 2px 2px;
+    }
+
+    /* --- Avatar --- */
+    .avatar-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+      animation: rise 0.6s 0.05s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border);
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      color: var(--accent);
+      /* Replace src below with your photo URL */
+    }
+
+    /* --- Name & Role --- */
+    .name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      color: var(--text);
+      text-align: center;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+      animation: rise 0.6s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .role {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 6px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      animation: rise 0.6s 0.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* --- Divider --- */
+    .divider {
+      margin: 28px 0;
+      border: none;
+      height: 1px;
+      background: var(--border);
+      animation: rise 0.6s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* --- Email --- */
+    .email-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 28px;
+      transition: color 0.2s;
+      animation: rise 0.6s 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .email-link:hover { color: var(--text); }
+    .email-link svg { flex-shrink: 0; }
+
+    /* --- Social links --- */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      background: var(--card);
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .link:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      transform: translateY(-1px);
+    }
+    .link:nth-child(1) { animation-delay: 0.25s; }
+    .link:nth-child(2) { animation-delay: 0.3s; }
+    .link:nth-child(3) { animation-delay: 0.35s; }
+
+    .link-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .link:hover .link-icon { background: #eddfc4; }
+
+    .link-label { flex: 1; }
+    .link-label span {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .link-arrow {
+      color: var(--muted);
+      transition: transform 0.2s, color 0.2s;
+    }
+    .link:hover .link-arrow {
+      transform: translateX(2px);
+      color: var(--accent);
+    }
+
+    /* --- Footer --- */
+    .footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--border);
+      letter-spacing: 0.05em;
+      animation: rise 0.6s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <!-- Avatar: replace the letter with an <img> tag once you have a photo -->
+    <div class="avatar-wrap">
+      <div class="avatar">YN</div>
+      <!-- To use a photo instead, replace the div above with:
+      <img class="avatar" src="https://your-photo-url.jpg" alt="Your Name" />
+      -->
+    </div>
+
+    <!-- Name & role -->
+    <h1 class="name">Your Name</h1>
+    <p class="role">Your Title · Location</p>
+
+    <hr class="divider" />
+
+    <!-- Email -->
+    <a class="email-link" href="mailto:you@email.com">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+      </svg>
+      you@email.com
+    </a>
+
+    <!-- Social links -->
+    <div class="links">
+
+      <a class="link" href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">
+        <div class="link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+          </svg>
+        </div>
+        <div class="link-label">LinkedIn <span>linkedin.com/in/yourprofile</span></div>
+        <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+      <a class="link" href="https://github.com/yourusername" target="_blank" rel="noopener">
+        <div class="link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+        </div>
+        <div class="link-label">GitHub <span>github.com/yourusername</span></div>
+        <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+      <a class="link" href="https://instagram.com/yourhandle" target="_blank" rel="noopener">
+        <div class="link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </div>
+        <div class="link-label">Instagram <span>@yourhandle</span></div>
+        <svg class="link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+    </div>
+
+    <p class="footer">yourdomain.com</p>
+  </div>
+</body>
+</html>
